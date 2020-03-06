@@ -1,10 +1,11 @@
 <template>
   <section class="profile">
-    <header class="header">
+    <HeaderTop title="我的"/>
+    <!-- <header class="header">
       <div class="header_title">
         <span class="header_title_text">我的</span>
       </div>
-    </header>
+    </header> -->
     <section class="profile-number">
       <router-link to="/login" class="profile-link">
         <div class="profile_image">
@@ -96,7 +97,11 @@
 </template>
 
 <script>
+import HeaderTop from '../components/HeaderTop'
 export default {
+    components:{
+    HeaderTop
+  },
     props: {
 
     },

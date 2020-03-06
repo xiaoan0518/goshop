@@ -2,17 +2,18 @@
    
       <div class="msite">
           <!--首页头部-->
-    <header class="header">
-      <a class="header_search">
-        <i class="iconfont icon-soushuo"></i>
-      </a>
-      <a class="header_title">
-        <span class="header_title_text ellipsis">昌平区北七家宏福科技园(337省道北)</span>
-      </a>
-      <a class="header_login">
-        <span class="header_login_text">登录|注册</span>
-      </a>
-    </header>
+          <!-- 从通用组件拿过来数据，所有组件可以随意编写 -->
+          <HeaderTop title="昌平区北七家宏福科技园(337省道北)" >
+            <!-- 左半部分 -->
+            <router-link slot="search" to="/search" class="header_search">
+                <i class="iconfont icon-soushuo"></i>
+            </router-link>
+            <!-- 又半部分 -->
+              <router-link slot="login" to="/login" class="header_login">
+                  <span class="header_login_text">登录|注册</span>
+              </router-link>
+          </HeaderTop>
+    
       
         <!--首页导航-->
         <nav class="msite_nav">
@@ -315,7 +316,11 @@
 </template>
 
 <script>
+import HeaderTop from '../components/HeaderTop'
 export default {
+  components:{
+    HeaderTop
+  },
     props: {
 
     },
