@@ -3,7 +3,7 @@
       <div class="msite">
           <!--首页头部-->
           <!-- 从通用组件拿过来数据，所有组件可以随意编写 -->
-          <HeaderTop title="昌平区北七家宏福科技园(337省道北)" >
+          <HeaderTop :title='address.name'>
             <!-- 左半部分 -->
             <router-link slot="search" to="/search" class="header_search">
                 <i class="iconfont icon-soushuo"></i>
@@ -317,9 +317,13 @@
 
 <script>
 import HeaderTop from '../components/HeaderTop'
+import {mapState} from 'vuex'
 export default {
   components:{
     HeaderTop
+  },
+  computed: {
+    ...mapState(['address'])
   },
     props: {
 

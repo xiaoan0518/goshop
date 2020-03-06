@@ -1,7 +1,6 @@
 // 配置axios链接请求
 import axios from 'axios'
 import qs from "qs"
-
 //  // 在发起请求请做一些业务处理(请求拦截器)
 axios.interceptors.request.use((config) => {
   // 解构出config里边的
@@ -25,7 +24,7 @@ axios.interceptors.request.use((config) => {
 axios.interceptors.response.use((response) => {
   // 成功返回data数据
   return response.data;
-}, (error) => {
+}, () => {
 
   //终端 Promise
   return new Promise(() => {});

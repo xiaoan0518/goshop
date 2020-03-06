@@ -6,6 +6,7 @@
 <script>
 
 import Footer from './components/Footer.vue'
+// import {mapState} from 'vuex'
 export default {
   // 名字
   name: 'App',
@@ -13,6 +14,10 @@ export default {
     // 注册组件
     Footer
   },
+  // mounted() {
+  //   console.log(this.$store.dispatch('getAddress' ));
+  // }
+
   
   
 }

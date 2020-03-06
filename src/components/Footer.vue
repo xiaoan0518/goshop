@@ -4,7 +4,7 @@
   <a href="javascript:;" 
   class="guide_item on"   
   :class="{'on':$route.path ==='/msite'}"
-  @click="$router.push('/msite')">
+  @click="$router.replace('/msite')">
     <span class="item_icon">
       <i class="iconfont icon-waimai"></i>
      
