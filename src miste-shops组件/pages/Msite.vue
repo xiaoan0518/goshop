@@ -1,4 +1,5 @@
 <template>
+   
       <div class="msite">
           <!--首页头部-->
           <!-- 从通用组件拿过来数据，所有组件可以随意编写 -->
@@ -18,25 +19,17 @@
         <nav class="msite_nav">
           <div class="swiper-container">
             <div class="swiper-wrapper">
-              <!-- 遍历一个大数组 -->
-              <div class="swiper-slide" v-for="(category, index) in categorysArr" :key="index">
-                <!-- 遍历一个小数组 -->
-                <a href="javascript:" class="link_to_food" v-for="(c, index) in category" :key="index">
+              <div class="swiper-slide">
+                <a href="javascript:" class="link_to_food">
                   <div class="food_container">
-                    <img :src="`https://fuss10.elemecdn.com`+ c.image_url">
+                    <img src="./images/nav/1.jpg">
                   </div>
-                  <span>{{c.title}}</span>
+                  <span>甜品饮品</span>
                 </a>
-               
                 
-                
-                
-                 
               </div>
-              
             </div>
             <!-- Add Pagination -->
-            <div class="swiper-pagination"></div>
             <div class="swiper-pagination"></div>
           </div>
         </nav>
@@ -50,9 +43,8 @@ import HeaderTop from '../components/HeaderTop'
 import {mapState} from 'vuex'
 import ShopList from '../components/ShopList'
 // 轮播图
-import Swiper from 'swiper'
-import 'swiper/css/swiper.min.css'
-
+// import Swiper from 'swiper'
+// import 'swiper/dist/css/swiper.min.css'
 export default {
   components:{
     HeaderTop,
@@ -60,107 +52,18 @@ export default {
   },
     mounted() {
       // 分发action
-      this.$store.dispatch('getAddress' )
+     this.$store.dispatch('getAddress' )
       // 分发商家列表
       this.$store.dispatch('getShops')
-      this.$store.dispatch('getCategory', ()=>{ //categorys数据变化了
-            this.$nextTick(()=>{
-            // 在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
-            new Swiper ('.swiper-container', {
-                loop: true, // 循环模式选项
-                // 如果需要分页器
-                pagination: {
-                  el: '.swiper-pagination',
-                },
-            })      
-          })
-      })
-    },
-  
- 
-
-  computed: {
-    ...mapState(['address','categorys']),
-    // 计算轮播图
-    categorysArr(){
-      // 1.大数组
-      const bigArr =[]
-      // 2.小数组
-      let SmallArr = []
-      // 3.拿到state里边的状态数据
-      let {categorys} = this
-      // 4.遍历总数组
-      categorys.forEach((c)=>{
-        // 5.将小数组添加到大数组（只能添加一次）
-        if (SmallArr.length === 0) {
-          bigArr.push(SmallArr)
-        }
-        // 6.把数据添加到小数组
-        SmallArr.push(c)
-        // 7.小数组的最大长度要为8
-        if (SmallArr.length ===8) {
-          SmallArr =[]
-        }
-        })
-        // 8.返回一个新数组
-        return bigArr
-    }
+      // 轮播图
+     this.$store.dispatch('getCategory' )
   },
 
-
-
-
-
-
-
-
-
-/**
- * 创建Swiper对象轮播有问题
- * 1.watch + nextTick()
- * 2.callback + nextTick()
- * 3.利用dipath()返回promise
- */
-
-// watch: {
-// 1.    //更新状态数据==》调用监视的回调==》异步更新界面
-//     categorys(){//categorys发生改变了/数组数据来了
-//       this.$nextTick(()=>{
-//       // 在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
-//        new Swiper ('.swiper-container', {
-//           loop: true, // 循环模式选项
-//           // 如果需要分页器
-//           pagination: {
-//             el: '.swiper-pagination',
-//           },
-//       })      
-//     })
-//   }
-// },
-
-
-
-   //3.  async mounted() {
-  //     // 分发action
-  //    this.$store.dispatch('getAddress' )
-  //     // 分发商家列表
-  //     this.$store.dispatch('getShops')
-  //     // 轮播图   返回promise在状态更新且界面更新之后才成功
-  //   await  this.$store.dispatch('getCategory' )
-  //     //  创建swiper对象的时间？比必须在列表页面显之后
-  //      new Swiper ('.swiper-container', {
-  //         loop: true, // 循环模式选项
-  //         // 如果需要分页器
-  //         pagination: {
-  //           el: '.swiper-pagination',
-  //         },
-  //     })       
-  // },
-
-
-
-
-
+  computed: {
+    ...mapState(['address'])
+  },
+  
+   
 };
 </script>
 

@@ -26,15 +26,12 @@ export default {
   },
 
   // 获取商品分类列表（轮播图）
- async  getCategory({commit},callback){
+ async  getCategory({commit}){
   const result = await reqCategory()
   if (result.code ===0) {
     const category = result.data
     commit(REQCATEGORY, category)
   }
-  // 在ccommit之后执行callback
-  // 判断是函数就调用，不是就调用
-  typeof callback === 'function' && callback()
   },
 
   // 获取商家列表
