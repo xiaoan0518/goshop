@@ -1,12 +1,13 @@
 <template>
   <div id="app">
-    <Footer/>
+    <router-view></router-view>
+    <Footer v-show="$route.meta.isRouterShow"/>
   </div>
 </template>
 <script>
 
 import Footer from './components/Footer.vue'
-// import {mapState} from 'vuex'
+
 export default {
   // 名字
   name: 'App',
@@ -14,9 +15,6 @@ export default {
     // 注册组件
     Footer
   },
-  // mounted() {
-  //   console.log(this.$store.dispatch('getAddress' ));
-  // }
 
   
   

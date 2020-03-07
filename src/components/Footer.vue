@@ -41,7 +41,7 @@
     <span>我的</span>
   </a>
 </footer>
- <router-view></router-view>
+
     </div>
 </template>
 

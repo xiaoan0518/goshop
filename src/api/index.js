@@ -8,6 +8,8 @@ import ajax from './ajax'
 // })
 export const reqAddress = ((latitude, longitude) => ajax.get( `/position/${longitude},${latitude}`))
 
+// 食品分类列表（轮播图）
+export const reqCategory = () => ajax.get(`index_category`)
 
 
 

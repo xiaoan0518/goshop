@@ -1,6 +1,12 @@
 // 多个间接更改数据的
-import {reqAddress} from '../api/index'
-import {REQADDRESS} from './actions.type'
+import {
+  reqAddress,
+  reqCategory
+} from '../api/index'
+import {
+  REQADDRESS,
+  REQCATEGORY
+} from './actions.type'
 export default {
   // 经纬度
  async getAddress ({commit,state}){
@@ -15,5 +21,14 @@ export default {
     }
     // commit(REQADDRESS,{ address:result.data})
    
+  },
+
+  // 获取商品分类列表（轮播图）
+ async  getCategory({commit}){
+  const result = await reqCategory()
+  if (result.code ===0) {
+    const category = result.data
+    commit(REQCATEGORY, category)
+  }
   }
 }
