@@ -4,40 +4,16 @@
       <div class="login_header">
         <h2 class="login_logo">硅谷外卖</h2>
         <div class="login_header_title">
-          <!-- 1.div绑定class样式display为none
-               2.绑定一定类名on如果为true就把display改成block
-               3.在data里边定义布尔值实现验证码于密码的切换
-                  点击切换isshowSMS是真是假
-               4.绑定点击事件
-           -->
-          <a href="javascript:;" :class="{on:isshowSmS}" @click="isshowSmS=true">短信登录</a>
-          <a href="javascript:;" :class="{on:!isshowSmS}" @click="isshowSmS=false">密码登录</a>
+          <a href="javascript:;" class="on">短信登录</a>
+          <a href="javascript:;">密码登录</a>
         </div>
       </div>
       <div class="login_content">
         <form>
-          <div :class="{on:isshowSmS}">
-            <section class="login_message" >
-              <!-- 
-                1.绑定v-mode拿到input里边的数据 
-                2.计算属性（正则表达式验证收集号）
-                3.手机号正则验证通过disabled变为false
-                4.给class正则的对象添加样式
-                -->
-              <input type="tel" maxlength="11" placeholder="手机号" v-model="phone">
-              <button :disabled="!right_phones || computTime>0" 
-                      class="get_verification" 
-                      :class="{right_phone:right_phones}"
-                      @click.prevent="sedcode"
-                      >
-                      {{computTime>0?`获取验证码${computTime}`:'获取验证码'}}
-                      <!-- 1.定义初始值为0显示验证码
-                           2.点击更改初始值为最大数字
-                           3.启动定时器倒计时
-                           4.清除定时器
-                           5.disabled里边computTime大于0也不可以点击
-                       -->
-                      </button>
+          <div class="on">
+            <section class="login_message">
+              <input type="tel" maxlength="11" placeholder="手机号">
+              <button disabled="disabled" class="get_verification" >获取验证码</button>
             </section>
             <section class="login_verification">
               <input type="tel" maxlength="8" placeholder="验证码">
@@ -47,25 +23,17 @@
               <a href="javascript:;">《用户服务协议》</a>
             </section>
           </div>
-          <div :class="{on:!isshowSmS}">
+          <div>
             <section>
-              <section class="login_message" >
-                <input type="tel" maxlength="11" placeholder="手机/邮箱/用户名" >
+              <section class="login_message">
+                <input type="tel" maxlength="11" placeholder="手机/邮箱/用户名">
               </section>
               <section class="login_verification">
-                <input :type="isshowpwd? 'text' : 'password'" maxlength="8" placeholder="密码">
-                <!-- 包裹密码隐藏显示按钮 -->
-                <!-- 按钮颜色 -->
-                <div class="switch_button " :class="isshowpwd?'on':'off'" @click="isshowpwd=!isshowpwd">
-                  <div class="switch_circle"  :class="{right:isshowpwd}"></div>
-                  <span class="switch_text">{{isshowpwd?'abc':''}}</span>
+                <input type="tel" maxlength="8" placeholder="密码">
+                <div class="switch_button off">
+                  <div class="switch_circle"></div>
+                  <span class="switch_text">...</span>
                 </div>
-                <!--  1.data定义一个标识  （显示隐藏）
-                      2.点击事件--标识=！标识
-                      3.标识三元表达式？有优势：无样式
-                      4.:class{类名：标识}左右滑动
-                      5.标识三元表达式？文字：空串 
-                      -->
               </section>
               <section class="login_message">
                 <input type="text" maxlength="11" placeholder="验证码">
@@ -91,35 +59,9 @@ export default {
     },
     data() {
         return {
-         isshowSmS:true,   //true 验证码   false  密码
-         phone:'',  //获取手机号
-         computTime:0, //验证码时间倒计时
-         isshowpwd:false  //密码是否显示铭文标识
+
         };
     },
-    computed: {
-      // 计算收集正则表达式
-      right_phones(){
-        return /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/.test(this.phone)
-      }
-    },
-    methods: {
-      sedcode(){
-        // 更改倒计时时间
-        console.log('sdsd');
-        
-        this.computTime =10
-      const clearTime = setInterval(() => {
-          this.computTime--
-          if (this.computTime===0) {
-            // 清除定时器
-            clearInterval(clearTime)
-          }
-        }, 1000);
-        
-      }
-    },
- 
 };
 </script>
 
@@ -184,8 +126,6 @@ export default {
                 color #ccc
                 font-size 14px
                 background transparent
-                &.right_phone
-                  color red
             .login_verification
               position relative
               margin-top 16px
@@ -225,8 +165,6 @@ export default {
                   background #fff
                   box-shadow 0 2px 4px 0 rgba(0,0,0,.1)
                   transition transform .3s
-                  &.right
-                    transform translateX(27px)
             .login_hint
               margin-top 12px
               color #999

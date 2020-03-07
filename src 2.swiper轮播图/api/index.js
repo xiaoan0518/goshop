@@ -20,8 +20,6 @@ export const reqShops = (latitude, longitude) => ajax.get(`/shops`, {
     }
    )
 
-// 
-
   
 
 
