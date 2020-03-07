@@ -2,7 +2,7 @@
       <div class="msite">
           <!--首页头部-->
           <!-- 从通用组件拿过来数据，所有组件可以随意编写 -->
-          <HeaderTop :title='address.name'>
+          <HeaderTop :title='address.name || "正在定位中"' >
             <!-- 左半部分 -->
             <router-link slot="search" to="/search" class="header_search">
                 <i class="iconfont icon-soushuo"></i>
@@ -46,12 +46,15 @@
 </template>
 
 <script>
+
 import HeaderTop from '../components/HeaderTop'
 import {mapState} from 'vuex'
 import ShopList from '../components/ShopList'
 // 轮播图
 import Swiper from 'swiper'
 import 'swiper/css/swiper.min.css'
+// 把一维数组拆分二维数组的包
+// import chunk from 'lodash/chunk'
 
 export default {
   components:{
@@ -105,6 +108,11 @@ export default {
         // 8.返回一个新数组
         return bigArr
     }
+   
+    // categorysArr(){
+    //   // 直接返回每个小数组位8个数据
+    //   return chunk(this.categorys,8)
+    // }
   },
 
 

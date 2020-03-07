@@ -1,6 +1,6 @@
 <template>
     <!-- 首页附近商家 -->
-        <div class="msite_shop_list">
+        <div class="msite_shop_list" v-if="shops.length>0" >
           <div class="shop_header">
             <i class="iconfont icon-xuanxiang"></i>
             <span class="shop_header_title">附近商家</span>
@@ -56,6 +56,7 @@
             </ul>
           </div>
         </div>
+        <div v-else><img src="./images/shop_back.svg" alt=""></div>
 </template>
 
 <script>

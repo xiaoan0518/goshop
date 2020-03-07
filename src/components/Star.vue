@@ -41,8 +41,6 @@ export default {
         }
         // // 向arr中添加n个off
          if(arr.length<5) {
-           console.log(arr.length);
-           
           arr.push('off')
         }
         return   arr
