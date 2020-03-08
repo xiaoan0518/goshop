@@ -4,3 +4,6 @@ export const REQADDRESS = 'reqAddress'
 export const REQCATEGORY = 'reqCategory'
 // 商家列表
 export const REQSHOPS = 'reqShops'
+
+// 发送短信验证码
+// export const REQSENDCODE = 'reqSendcode'

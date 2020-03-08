@@ -2,7 +2,8 @@
 import {
   REQADDRESS,
   REQCATEGORY,
-  REQSHOPS
+  REQSHOPS,
+  // REQSENDCODE
 } from './actions.type'
 export default {
   // 经纬度
@@ -18,7 +19,12 @@ export default {
   // 获取商家列表
   [REQSHOPS](state, shops){
     state.shops = shops
-  }
+  },
+
+  // 发送短信验证码
+  // [REQSENDCODE](state, sendcode) {
+  //   state.sendcode = sendcode
+  // }
   
   
    

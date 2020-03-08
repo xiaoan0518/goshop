@@ -20,7 +20,12 @@ export const reqShops = (latitude, longitude) => ajax.get(`/shops`, {
     }
    )
 
-// 
+// 发送短信验证码
+export const reqSendcode = (phone) => ajax.get(`sendcode`,{
+  params:{
+    phone
+  }
+})
 
   
 

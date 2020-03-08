@@ -24,7 +24,18 @@
                 3.手机号正则验证通过disabled变为false
                 4.给class正则的对象添加样式
                 -->
-              <input type="tel" maxlength="11" placeholder="手机号" v-model="phone">
+              <input type="tel" maxlength="11" 
+              placeholder="手机号s" 
+              v-model="phone"
+              name="phone"
+              v-validate="'required|mobile'"
+              >
+              <!-- 表单验证
+                   1.name：中文显示定义的标识
+                   2.v-validate="'required|mobile；默认显示和扩展显示的的标识(两种方式)
+                   2.required:false(清空input是否显示),regex:/^\d{6}$/（通过正则判断）
+                   3.errors.first('phone')显示对应的字体-->
+              <span  >{{errors.first('phone')}}</span>
               <button :disabled="!right_phones || computTime>0" 
                       class="get_verification" 
                       :class="{right_phone:right_phones}"
@@ -40,7 +51,12 @@
                       </button>
             </section>
             <section class="login_verification">
-              <input type="tel" maxlength="8" placeholder="验证码">
+              <input type="tel" 
+              maxlength="8" placeholder="验证码"
+              name="code"
+              v-validate="{required:false,regex:/^\d{6}$/}"
+              >
+              <span>{{errors.first('code')}}</span>
             </section>
             <section class="login_hint">
               温馨提示：未注册硅谷外卖帐号的手机号，登录时将自动注册，且代表已同意
@@ -50,7 +66,13 @@
           <div :class="{on:!isshowSmS}">
             <section>
               <section class="login_message" >
-                <input type="tel" maxlength="11" placeholder="手机/邮箱/用户名" >
+                <input type="tel" maxlength="11" 
+                placeholder="手机/邮箱/用户名s"
+              
+                name='name'
+                v-validate="'required'"
+                 >
+                <span>{{errors.first('name')}}</span>
               </section>
               <section class="login_verification">
                 <input :type="isshowpwd? 'text' : 'password'" maxlength="8" placeholder="密码">
@@ -69,11 +91,19 @@
               </section>
               <section class="login_message">
                 <input type="text" maxlength="11" placeholder="验证码">
-                <img class="get_verification" src="./images/captcha.svg" alt="captcha">
+                <img class="get_verification" 
+                src="http://localhost:5000/captcha" 
+                alt="captcha"
+                @click="updatacaptcha"
+                ref="captcha"
+                >
+                <!-- 一次性短信验证码
+                     1.点击事件  通过$ref从拿到src从新指定
+                     2.通过时间戳点击更新 -->
               </section>
             </section>
           </div>
-          <button class="login_submit">登录</button>
+          <button class="login_submit" @click.prevent="login">登录</button>
         </form>
         <a href="javascript:;" class="about_us">关于我们</a>
       </div>
@@ -85,6 +115,9 @@
 </template>
 
 <script>
+// 发送短信验证码的请求
+import {reqSendcode} from '../api'
+import { Toast } from 'mint-ui';
 export default {
     props: {
 
@@ -97,6 +130,9 @@ export default {
          isshowpwd:false  //密码是否显示铭文标识
         };
     },
+    mounted() {
+      
+    },
     computed: {
       // 计算收集正则表达式
       right_phones(){
@@ -104,22 +140,55 @@ export default {
       }
     },
     methods: {
-      sedcode(){
+      // 点击发送验证码
+    async  sedcode(){
         // 更改倒计时时间
-        console.log('sdsd');
-        
         this.computTime =10
       const clearTime = setInterval(() => {
-          this.computTime--
-          if (this.computTime===0) {
+        if (this.computTime===0) {
             // 清除定时器
             clearInterval(clearTime)
+          }else{
+           this.computTime--
           }
         }, 1000);
-        
+        // this.$store.dispatch('getSendcode',this.phone)//发送短信验证码
+        // 发送短信验证码
+      const result =  await reqSendcode(this.phone)
+      if (result.code ===0) {
+        Toast('发送请求成功了')
+      }else{
+        // 获取验证码失败，没有倒计时
+        this.computTime=0
+        Toast(result.msg)
       }
     },
+
+      // 点击登录验证表单
+    async login (){
+      let names
+      // 获取到是手机号登录 || 用户名登录
+      const {isshowSmS} = this
+      if (isshowSmS) {
+        names=['phone','code']
+      }else{
+        names=['name']
+      }
+      // 对指定的表单进行验证
+      const success = await this.$validator.validateAll(names)
+      if (success) {
+        alert('表单验证通过')
+      }
+    },
+
+    //一次性图形验证码
+    updatacaptcha(){
+       this.$refs.captcha.src ='http://localhost:5000/captcha?tim='+Date.now()
+    }
  
+    },
+
+    
 };
 </script>
 

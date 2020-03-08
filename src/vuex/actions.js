@@ -2,12 +2,14 @@
 import {
   reqAddress,
   reqCategory,
-  reqShops
+  reqShops,
+  // reqSendcode
 } from '../api/index'
 import {
   REQADDRESS,
   REQCATEGORY,
-  REQSHOPS
+  REQSHOPS,
+  // REQSENDCODE
 } from './actions.type'
 export default {
   // 经纬度
@@ -45,5 +47,18 @@ export default {
      const shops = result.data
      commit(REQSHOPS, shops)
    }
-  }
+  },
+
+  // 发送短信验证码
+//  async getSendcode({commit},phone) {
+//    const sendcode = await reqSendcode(phone)
+//    if (sendcode.code ===0) {
+//      alert('正确')
+//      commit(REQSENDCODE, sendcode)
+//    }else{
+//      alert('错误')
+//    }
+//   }
+
+  
 }
