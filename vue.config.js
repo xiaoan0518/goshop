@@ -1,6 +1,7 @@
 // 跨域的简单但是
 module.exports = {
   devServer: {
+    // proxy: 'http://localhost:5000'
     proxy: 'http://localhost:5000'
   }
 }

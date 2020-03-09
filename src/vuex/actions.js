@@ -9,6 +9,10 @@ import {
   REQADDRESS,
   REQCATEGORY,
   REQSHOPS,
+  ACTIONUSER,
+  DELETUSERS,
+  USERTOKEN,
+  DELTEDTOKEN
   // REQSENDCODE
 } from './actions.type'
 export default {
@@ -48,6 +52,26 @@ export default {
      commit(REQSHOPS, shops)
    }
   },
+
+  // 保存uest
+  actionUser({commit},user){
+    // 在localStorage存储token
+    const token = user.token
+    localStorage.setItem('key_token', user.token)
+    commit(USERTOKEN, token)
+    delete user.token
+    // 保存user
+    commit(ACTIONUSER, user)
+  },
+
+  // 清空user
+  deletusers({commit}){
+     // 清空user
+    commit(DELETUSERS),
+    // 删除token
+    commit(DELTEDTOKEN)
+  }
+
 
   // 发送短信验证码
 //  async getSendcode({commit},phone) {
