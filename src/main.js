@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import  './api'
+import './mock/mock-server'
 // 引入validate.js文件
 import './validate.js'
 import store from './vuex'

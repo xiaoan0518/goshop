@@ -3,6 +3,9 @@ import {
   reqAddress,
   reqCategory,
   reqShops,
+  reqShopInfo,
+  reqShopRatings,
+  reqShopGoods
   // reqSendcode
 } from '../api/index'
 import {
@@ -12,7 +15,10 @@ import {
   ACTIONUSER,
   DELETUSERS,
   USERTOKEN,
-  DELTEDTOKEN
+  DELTEDTOKEN,
+  RECEIVE_GOODS,
+  RECEIVE_RATINGS,
+  RECEIVE_INFO
   // REQSENDCODE
 } from './actions.type'
 export default {
@@ -70,7 +76,54 @@ export default {
     commit(DELETUSERS),
     // 删除token
     commit(DELTEDTOKEN)
-  }
+    localStorage.removeItem('key_token')
+  },
+
+// 商家详情信息
+  async getShopInfo({
+      commit
+    }, cb) {
+      const result = await reqShopInfo()
+      if (result.code === 0) {
+        const info = result.data
+        info.score = 3.5
+        commit(RECEIVE_INFO, {
+          info
+        })
+
+        cb && cb()
+      }
+    },
+
+    // 异步获取商家评价列表
+    async getShopRatings({
+        commit
+      }, cb) {
+        const result = await reqShopRatings()
+        if (result.code === 0) {
+          const ratings = result.data
+          commit(RECEIVE_RATINGS, {
+            ratings
+          })
+
+          cb && cb()
+        }
+      },
+
+      // 异步获取商家商品列表
+      async getShopGoods({
+        commit
+      }, cb) {
+        const result = await reqShopGoods()
+        if (result.code === 0) {
+          const goods = result.data
+          commit(RECEIVE_GOODS, {
+            goods
+          })
+          // 如果组件中传递了接收消息的回调函数, 数据更新后, 调用回调通知调用的组件
+          cb && cb()
+        }
+      },
 
 
   // 发送短信验证码

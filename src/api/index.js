@@ -23,9 +23,9 @@ export const reqShops = (latitude, longitude) => ajax.get(`/shops`, {
         longitude
       },
       //是不是携带了token  携带token就可以访问  不携带token就不可以访问
-      headers: {
-        sedToken: true
-      }
+      // headers: {
+      //   sedToken: true
+      // }
     }
    )
 
@@ -47,7 +47,25 @@ export const reqloginPwd = (name, pwd, captcha) => ajax.post(`login_pwd`, {
 })
 
 // 根据user获取用户信息（cooken）(实现自动登录)
-export const reqUserInfo = () => ajax.get(`userinfo`)
+// export const reqUserInfo = () => ajax.get(`userinfo`)
+
+// 根据user获取用户信息（token）(实现自动登录)
+export const reqAutologin = () => ajax.get(`auto_login`,
+{ //是不是携带了token  携带token就可以访问  不携带token就不可以访问
+  headers: {
+    sedToken: true
+  }
+})
+
+//  获取商家信息
+export const reqShopInfo = () => ajax('/info')
+
+
+//  获取商家评价数组
+export const reqShopRatings = () => ajax('/ratings')
+
+// 获取商家商品数组
+export const reqShopGoods = () => ajax('/goods')
 
   
 

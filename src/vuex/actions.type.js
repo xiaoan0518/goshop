@@ -14,7 +14,11 @@ export const ACTIONUSER = 'actionUser'
 export const USERTOKEN = 'userTOken'
 // 删除token
 export const DELTEDTOKEN = 'deltedToken'
-
-
 // 清空uesr/退出登录
 export const DELETUSERS = 'deletusers'
+// 接收商品数组
+export const RECEIVE_GOODS = 'receive_goods' 
+// 接收商家评价数组
+export const RECEIVE_RATINGS = 'receive_ratings' 
+// 接收商家信息
+export const RECEIVE_INFO = 'receive_info' 

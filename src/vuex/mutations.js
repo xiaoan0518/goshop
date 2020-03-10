@@ -6,7 +6,11 @@ import {
   ACTIONUSER,
   DELETUSERS,
   USERTOKEN,
-  DELTEDTOKEN
+  DELTEDTOKEN,
+   RECEIVE_GOODS,
+   RECEIVE_RATINGS,
+   RECEIVE_INFO
+
   // REQSENDCODE
 } from './actions.type'
 export default {
@@ -41,7 +45,26 @@ export default {
   //删除token
   [DELTEDTOKEN](state){
     state.token = ''
-  }
+  },
+
+
+  [RECEIVE_INFO](state, {
+    info
+  }) {
+    state.info = info
+  },
+
+  [RECEIVE_RATINGS](state, {
+    ratings
+  }) {
+    state.ratings = ratings
+  },
+
+  [RECEIVE_GOODS](state, {
+    goods
+  }) {
+    state.goods = goods
+  },
 
   // 发送短信验证码
   // [REQSENDCODE](state, sendcode) {

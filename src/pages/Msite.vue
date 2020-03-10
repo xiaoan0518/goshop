@@ -9,7 +9,7 @@
             </router-link>
             <!-- 又半部分 -->
               <router-link slot="login" to="/login" class="header_login">
-                  <span class="header_login_text">登录|注册</span>
+                  <span class="header_login_text"> {{user.name?user.name:'登录/注册'}}</span>
               </router-link>
           </HeaderTop>
     
@@ -83,7 +83,7 @@ export default {
  
 
   computed: {
-    ...mapState(['address','categorys']),
+    ...mapState(['address','categorys','user']),
     // 计算轮播图
     categorysArr(){
       // 1.大数组

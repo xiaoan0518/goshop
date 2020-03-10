@@ -4,6 +4,11 @@ import Search from '../pages/Search.vue'
 import Order from '../pages/Order.vue'
 import Profile from '../pages/Profile.vue'
 import Login from '../pages/Login.vue'
+import Shop from '../pages/Shop.vue'
+// 二级路由
+import Goods from '../pages/Goods/Goods.vue'
+import Ratings from '../pages/Goods/Ratings.vue'
+import Info from '../pages/Goods/Info.vue'
 
 
 
@@ -45,10 +50,33 @@ export default  [
         path: '/login',
         component: Login
     },
-    // 重定向
-    {
-        path: '/',
-        redirect: 'Msite'
-    }
-   
+    
+    // 商家详情页面
+     {
+         path: '/shop',
+         component: Shop,
+         children:[
+             {
+                 path: '/goods',
+                 component: Goods
+             },
+            {
+                path: '/ratings',
+                component: Ratings
+            },
+            {
+                path: '/info',
+                component: Info
+            },
+            {
+                path: '/',
+                redirect: '/goods'
+            }
+         ]
+     },
+   // 重定向
+   {
+       path: '/',
+       redirect: 'msite'
+   },
 ]
