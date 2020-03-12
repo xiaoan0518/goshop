@@ -94,11 +94,15 @@
           <span class="my_order_icon">
             <i class="iconfont icon-jiantou1"></i>
           </span>
+            <router-link to="/a" >   aaa  </router-link>
+           <router-link to="/b" > bb </router-link>
+           <router-link to="/login" > cc </router-link>
         </div>
       </a>
     </section>
     <div v-if="user._id" @click="deletUser" >
       <mt-button type="primary" style="width:100%" >退出登录</mt-button>
+    
       </div>
     
   </section>
